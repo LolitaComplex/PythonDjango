@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style type="text/css">
+        li{
+            display: inline-block;
+            width: 100px;
+            margin: 0px auto;
+            text-align: center;
+            transform: translateY(50%)
+        }
+
+        ul {
+            list-style: none;
+            height: 50px ;
+            width: 100%;
+            background: rosybrown ;
+            padding: 0;
+            margin: 0;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+
+    <ul>
+        <li><a href="{% url 'index' %}">首页</a></li>
+        <li><a href="{% url 'bookManager' %}">图书管理</a></li>
+    </ul>
+    <table>
+        <tr>
+            <td></td>
+            <td>书名</td>
+            <td>作者</td>
+        </tr>
+        
+        {% for book in books %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ book.1 }}</td>
+            <td>{{ book.2 }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

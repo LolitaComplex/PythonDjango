@@ -1,0 +1,71 @@
+{% load common_filter %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <p>
+        这是Template1 App中的模板文件
+    </p>
+    <div>
+        {{ username }}
+    </div>
+    <div>
+        {{ person.personName }}
+    </div>
+    <div>
+        {{ dict.key }}
+    </div>
+    <div>
+        {{ list.0 }}
+    </div>
+
+    {% if boo %}
+        <p>1</p>
+    {% elif boo %}
+        <p>2</p>
+    {% else %}
+        <p>3</p>
+    {% endif %}
+
+    {% for x in list %}
+        <p>{{ x }}</p>
+        <!-- 循环内常用变量 -->
+        <p> 循环计数（从1开始）：{{ forloop.counter }}  </p>
+        <p> 循环计数（从0开始）：{{ forloop.counter0 }}  </p>
+        <p> 是否是第一行：{{ forloop.first }} </p>
+        <p> 是否是最后一行：{{ forloop.last }} </p>
+    {% endfor %}
+
+    {% with  variable="啦啦啦"  %}
+        <p> {{ variable }} </p>
+    {% endwith %}
+
+    {% with "字符串" as variable %}
+        <p> {{ variable }} </p>
+    {% endwith %}
+
+    <div>
+        {% url 'App:Template' %}
+    </div>
+    <div>
+        {% url 'App:Template' articalId="10" %}
+    </div>
+    <div>
+        {% url 'App:Template' articalId="10" %}?name=duying
+    </div>
+
+    <!-- 过滤器 -->
+    <div>
+        {{ list|add:list }}
+    </div>
+
+    <p> {{ time|date:"Y/m/d" }} </p>
+
+    <p> {{ "凉宫春日"|commonFilter:"阿虚" }}
+</body>
+</html>
