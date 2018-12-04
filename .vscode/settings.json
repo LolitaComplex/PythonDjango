@@ -1,4 +1,4 @@
 {
     "python.pythonPath": "E:\\Program\\Environment\\PythonVirtualEnvs\\HelloWorkonHome\\Scripts\\python.exe",
-    "terminal.integrated.shellArgs.windows": ["/k", "E:\\Program\\Environment\\PythonVirtualEnvs\\HelloWorkonHome\\Scripts\\activate"]
+    // "terminal.integrated.shellArgs.windows": ["/k", "E:\\Program\\Environment\\PythonVirtualEnvs\\HelloWorkonHome\\Scripts\\activate.ps1"]
 }
