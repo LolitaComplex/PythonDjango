@@ -18,5 +18,5 @@ from django.urls import path, include
 
 
 urlpatterns = [
-    path("book", include("CommonAggregate.urls"))
+    path("book/", include("CommonAggregate.urls"))
 ]
