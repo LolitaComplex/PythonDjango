@@ -23,7 +23,8 @@ class Book(models.Model):
     pages = models.IntegerField()
     price = models.FloatField()
     rating = models.FloatField()
-    author = models.ForeignKey(Author,on_delete=models.CASCADE)
+    create_time = models.DateField(auto_now_add = True, null = False)
+    author = models.ForeignKey(Author,on_delete=models.CASCADE, related_name = "books")
     publisher = models.ForeignKey(Publisher, on_delete=models.CASCADE)
 
     def __str__(self):

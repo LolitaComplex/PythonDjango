@@ -1,4 +1,4 @@
-from django.db.models import Avg, F, Q
+from django.db.models import Avg, F, Q, Count
 from django.db import connection
 from django.http import HttpResponse
 from .models import Book, BookOrder, Author
@@ -32,4 +32,55 @@ def updatePrice(request):
         print(book)
     print(connection.queries)
     return HttpResponse("F表达式更新")
+
+
+def values(request):
+    books = Book.objects.values("id", "name", auhorName = F("author__name"), publisherName = F("publisher__name"))
+    print("这是数据库的图示")
+    for book in books:
+        print(book)
+
+    __printSql()
+    return HttpResponse("Values")
+
+def orderBy(reuqest):
+    books = Book.objects.annotate(bookCount = Count("bookorder__book_id")) \
+        .values("id", "name", "bookCount") \
+        .order_by("create_time")
+
+    print("集合函数等等练习：")
+    for book in books:
+        print("%s ...BookCOunt" % (book))
+
+    __printSql()
+    return HttpResponse("OrderBy")
+
+def selectRelated(request):
+    print("效率低的方式：")
+    books = Book.objects.all()
+    for book in books:
+        print("%s : %s" % (book, book.author))
+
+    print("高效点的方式：")
+    books = Book.objects.all().select_related("author")
+    for book in books:  
+        print("%s : %s" % (book, book.author))
+
+    __printSql()
+    return HttpResponse("StaticRelated")
+
+
+def selectRelatedAuthor(request):
+    authors = Author.objects.all()
+    for author in authors:
+        print("%s : %s" % (author, author.books.all()))
+
+    __printSql()
+    return HttpResponse("查询作者")
+
+def __printSql():
+    print("运行的全部Sql语句：")
+    for sql in connection.queries:
+        print(sql)
+
 
