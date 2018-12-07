@@ -29,7 +29,7 @@
             "name": "Python: Django",
             "type": "python",
             "request": "launch",
-            "program": "${workspaceFolder}/HelloMySql/manage.py",
+            "program": "${workspaceFolder}/OrmHomework/manage.py",
             "console": "integratedTerminal",
             "args": [
                 "runserver",
