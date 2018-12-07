@@ -8,5 +8,6 @@ urlpatterns = [
     path("values", views.values),
     path("orderBy", views.orderBy),
     path("selectRelated", views.selectRelated),
-    path("selectRelatedAuthor", views.selectRelatedAuthor)
+    path("selectRelatedAuthor", views.selectRelatedAuthor),
+    path("defer", views.defer)
 ]

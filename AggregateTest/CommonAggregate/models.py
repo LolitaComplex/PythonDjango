@@ -1,13 +1,5 @@
 from django.db import models
 
-class Author(models.Model):
-    """作者模型"""
-    name = models.CharField(max_length=100)
-    age = models.IntegerField()
-    email = models.EmailField()
-
-    class Meta:
-        db_table = 'author'
 
 class Publisher(models.Model):
     """出版社模型"""
@@ -16,6 +8,15 @@ class Publisher(models.Model):
     class Meta:
         db_table = 'publisher'
 
+
+class Author(models.Model):
+    """作者模型"""
+    name = models.CharField(max_length=100)
+    age = models.IntegerField()
+    email = models.EmailField()
+
+    class Meta:
+        db_table = 'author'
 
 class Book(models.Model):
     """图书模型"""

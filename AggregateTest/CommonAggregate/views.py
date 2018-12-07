@@ -1,4 +1,4 @@
-from django.db.models import Avg, F, Q, Count
+from django.db.models import Avg, F, Q, Count, Prefetch
 from django.db import connection
 from django.http import HttpResponse
 from .models import Book, BookOrder, Author
@@ -75,8 +75,29 @@ def selectRelatedAuthor(request):
     for author in authors:
         print("%s : %s" % (author, author.books.all()))
 
+    print("=" * 50)
+
+    authors = Author.objects.prefetch_related("books")
+    for author in authors:
+        print("%s : %s" % (author, author.books.all()))
+
+    print("=" * 50)
+
+    prefetch = Prefetch("books", queryset = Book.objects.filter(rating__gte = 5))
+    authors = Author.objects.prefetch_related(prefetch)
+    for author in authors:
+        print("%s : %s" % (author, author.books.all()))
+
     __printSql()
     return HttpResponse("查询作者")
+
+def defer(request):
+    books = Book.objects.select_related("author").defer("name")
+    for book in books:
+        print(book.rating)
+    __printSql()
+    return HttpResponse("Defer")
+
 
 def __printSql():
     print("运行的全部Sql语句：")
