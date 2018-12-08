@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from .models import Student, Teacher, Score, Course
 from django.db import transaction
+import random
 
 def index(request):
     return HttpResponse("Index")
@@ -32,6 +33,7 @@ def createData(request):
     ])
 
     Course.objects.bulk_create(__initCourseList())
+    __initScoreList()
     return HttpResponse("CreateData")
 
 
@@ -58,5 +60,21 @@ def __initCourseList():
             continue
         courseList.append(Course(name = teacher.name[0: 2], teacher = teacher))
     return courseList
+
+
+def __initScoreList():
+    courseSet = Course.objects.all()
+    studentSet = Student.objects.all()
+
+    courseLen, studentLen = (len(courseSet), len(studentSet))
+    for index in range(50):
+        scoreNum = random.randint(1, 150)
+        course = courseSet[random.randint(0, courseLen - 1)]
+        student = studentSet[random.randint(0, studentLen - 1)]
+        print("%s -- %s : %d" % (student.name, course.name, scoreNum))
+        exists = Score.objects.filter(course_id = course.id, student_id = student.id).exists()
+        if(not exists):
+            score = Score(student = student, course = course, number = scoreNum)
+            score.save()
 
 
