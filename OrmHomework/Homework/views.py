@@ -81,7 +81,10 @@ def __initScoreList():
 
 
 def question1(request):
-    students = Student.objects.annotate(scoreAvg = Avg("score__number")).filter(scoreAvg__gt = 60)
+    students = Student.objects  \
+        .annotate(scoreAvg = Avg("score__number"))  \
+        .filter(scoreAvg__gt = 60)
+
     for student in students:
         print("%s : %d" % (student.name, student.scoreAvg))
 
@@ -90,8 +93,10 @@ def question1(request):
 
 
 def question2(request):
-    students = Student.objects.annotate(courseCount = Count("score__course_id"), \
-        scoreSum = Sum("score__number")).defer("gender")
+    students = Student.objects  \
+        .annotate(courseCount = Count("score__course_id"), scoreSum = Sum("score__number")) \
+        .defer("gender")
+
     for student in students:
         print(student.__dict__)
 
@@ -109,7 +114,8 @@ def question3(request):
 
 
 def question4(rquest):
-    students = Student.objects.exclude(score__course__teacher__name__startswith = "数学") \
+    students = Student.objects  \
+        .exclude(score__course__teacher__name__startswith = "数学") \
         .defer("gender")
     for student in students:
         print(student.__dict__)
@@ -120,7 +126,8 @@ def question4(rquest):
 
 
 def question5(request):
-    students = Student.objects.filter(score__course_id__in = (1, 2)) \
+    students = Student.objects  \
+        .filter(score__course_id__in = (1, 2)) \
         .defer("gender").distinct()
     for student in students:
         print("%d : %s" % (student.id, student.name))
@@ -129,7 +136,8 @@ def question5(request):
     return HttpResponse("查询学过id为1和2的所有同学的学号、姓名")
 
 def question6(request):
-    students = Student.objects.filter(score__course__teacher__name = "历史老师")\
+    students = Student.objects  \
+        .filter(score__course__teacher__name = "历史老师")\
         .defer("gender")
     for student in students:
         print("%d : %s" % (student.id, student.name))
@@ -138,7 +146,8 @@ def question6(request):
     return HttpResponse("查询学过历史老师所教的所有课的同学的学号、姓名")
 
 def question7(reuqest):
-    studnets = Student.objects.exclude(score__number__gte = 120) \
+    studnets = Student.objects  \
+        .exclude(score__number__gte = 120) \
         .defer("gender").distinct()
     for student in studnets:
         print("%d : %s" % (student.id, student.name))
@@ -158,7 +167,8 @@ def question8(reuqest):
     # print(finishStudent)
 
     # Sql函数有distinct属性
-    students = Student.objects.annotate(count = Count("score__course__name", distinct = True))   \
+    students = Student.objects  \
+        .annotate(count = Count("score__course__name", distinct = True))   \
         .defer("gender")
 
     for student in students:
@@ -169,7 +179,8 @@ def question8(reuqest):
 
 
 def question9(request):
-    students = Student.objects.annotate(scoreAvg = Avg("score__number")) \
+    students = Student.objects  \
+        .annotate(scoreAvg = Avg("score__number")) \
         .order_by("-scoreAvg")
     for student in students:
         print("%s : %d" % (student.name, student.scoreAvg))
@@ -179,8 +190,9 @@ def question9(request):
 
 
 def question10(request):
-    courses = Course.objects.annotate(maxScore = Max("score__number"), minScore = Min("score__number"), \
-        teacherName = F("teacher__name")).defer("teacher_id")
+    courses = Course.objects    \
+        .annotate(maxScore = Max("score__number"), minScore = Min("score__number"), teacherName = F("teacher__name"))   \
+        .defer("teacher_id")
 
     for course in courses:
         print("%s, %s, %s, %s, %s" % (course.id, course.name, course.teacherName, course.maxScore, course.minScore))
@@ -190,7 +202,8 @@ def question10(request):
 
 
 def question11(request):
-    courses = Course.objects.annotate(scoreAvg = Avg("score__number"), teacherName = F("teacher__name"))\
+    courses = Course.objects    \
+        .annotate(scoreAvg = Avg("score__number"), teacherName = F("teacher__name"))    \
         .defer("teacher_id").filter(scoreAvg__isnull = False).order_by("scoreAvg")
 
     for course in courses:
@@ -201,8 +214,8 @@ def question11(request):
 
 
 def question12(request):
-    students = Student.objects.aggregate(maleNum = Count("gender", filter = Q(gender = 0)), \
-        famaleNum = Count("gender", filter = Q(gender = 1)))
+    students = Student.objects  \
+        .aggregate(maleNum = Count("gender", filter = Q(gender = 0)), famaleNum = Count("gender", filter = Q(gender = 1)))
     
     print(students)
 
