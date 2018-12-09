@@ -19,5 +19,11 @@ from . import views
 urlpatterns = [
     path('', views.index),
     path('requestGet', views.requestGet),
-    path('reuqestPost', views.requestPost)
+    path('reuqestPost', views.requestPost),
+    path("littleFileDownload", views.littleFileDownload),
+    path("littleFileMakeByTemplatesDownload", views.littleFileMakeByTemplatesDownload),
+    path("bigFileDownload", views.bigFileDownload),
+    path("bigFileOtherDownload", views.bigFileOtherDownload),
+    path("bigFileBadDownload", views.bigFileBadDownload),
+    path("bigFileCsvDownload", views.bigFileCsvDownload),
 ]

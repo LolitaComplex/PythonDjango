@@ -1,0 +1,2 @@
+{% for value in list %}{{ value.0 }},{{ value.1 }},{{ value.2 }}
+{% endfor %}
