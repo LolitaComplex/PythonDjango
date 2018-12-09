@@ -29,7 +29,7 @@
             "name": "Python: Django",
             "type": "python",
             "request": "launch",
-            "program": "${workspaceFolder}/OrmHomework/manage.py",
+            "program": "${workspaceFolder}/HttpTest/manage.py",
             "console": "integratedTerminal",
             "args": [
                 "runserver",
