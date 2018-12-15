@@ -8,15 +8,18 @@ from django.http import HttpResponse
 
 # Create your views here.
 def index(request):
-    userId = request.session.get("userId")
-    context = {}
-    try:
-        user = User.objects.get(pk = userId)
-        context["user"] = user
-        context["isLogin"] = True
-    except :
-        context["isLogin"] = False
-    return render(request, "login_service_index.html", context = context)
+    # userId = request.session.get("userId")
+    # context = {}
+    # try:
+    #     user = User.objects.get(pk = userId)
+    #     context["user"] = user
+    #     context["isLogin"] = True
+    # except :
+    #     context["isLogin"] = False
+    print("redenr之前")
+    response = render(request, "login_service_index.html")
+    print("redenr之后")
+    return response
 
 
 class LoginView(View):
@@ -101,3 +104,15 @@ def messageIndex(request):
     print(DEFAULT_TAGS)
     print(DEFAULT_LEVELS)
     return render(request, "messge_service.html")
+
+# {'level': 20, 'message': 'InfoMessage', 'extra_tags': ''}
+# {'level': 10, 'message': 'DebugMessage', 'extra_tags': ''}
+# {'level': 30, 'message': 'WarningMessage', 'extra_tags': ''}
+# {'level': 25, 'message': 'SuccessMessage', 'extra_tags': ''}
+# {'level': 40, 'message': 'ErrorMessage', 'extra_tags': ''}
+# {10: 'debug', 20: 'info', 25: 'success', 30: 'warning', 40: 'error'}
+# {'DEBUG': 10, 'INFO': 20, 'SUCCESS': 25, 'WARNING': 30, 'ERROR': 40}
+
+
+def mediaIndex(request):
+    return render(request, "media_url_service.html")

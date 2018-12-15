@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'LoginService'
+    'LoginService',
+    'MiddleWare'
 ]
 
 MIDDLEWARE = [
@@ -48,6 +49,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'MiddleWare.middleware.makeHelloWordMakeware',
+    'MiddleWare.middleware.MakeWareHelloWorld'
 ]
 
 ROOT_URLCONF = 'ContextProcessor.urls'
@@ -61,6 +64,7 @@ TEMPLATES = [
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
+                'django.template.context_processors.media',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'LoginService.context_processtor.frontContext'
@@ -126,3 +130,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 INTERNAL_IPS = ['127.0.0.1']
+
+MEDIA_ROOT = os.path.join(BASE_DIR, "medias")
+MEDIA_URL = '/media/'

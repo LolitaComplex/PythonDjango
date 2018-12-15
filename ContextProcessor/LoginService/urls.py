@@ -10,5 +10,6 @@ urlpatterns = [
     path("login", views.LoginView.as_view(), name = "Login"),
     path("register", views.RegisterView.as_view(), name = "Register"),
     path("debug", views.debugIndex, name = "DebugIndex"),
-    path("messages", views.messageIndex, name = "MessageIndex")
+    path("messages", views.messageIndex, name = "MessageIndex"),
+    path("media", views.mediaIndex, name = "MediaIndex")
 ]

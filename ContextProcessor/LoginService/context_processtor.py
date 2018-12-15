@@ -12,5 +12,5 @@ def frontContext(request):
             context["user"] = user
         except :
             pass
-
+    # print(request.__dict__)
     return context
