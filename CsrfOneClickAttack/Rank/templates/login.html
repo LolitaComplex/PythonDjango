@@ -26,5 +26,12 @@
             </tr>
         </table>
     </form>
+
+    <p class="tdTitle">错误信息：</p>
+    <ul>
+        {% for message in messages %}
+            <li>{{ message.message }}</li>
+        {% endfor %}
+    </ul>
 </body>
 </html>

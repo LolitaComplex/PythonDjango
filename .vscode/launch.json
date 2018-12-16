@@ -29,7 +29,7 @@
             "name": "Python: Django",
             "type": "python",
             "request": "launch",
-            "program": "${workspaceFolder}/HttpTest/manage.py",
+            "program": "${workspaceFolder}/CsrfOneClickAttack/Rank/manage.py",
             "console": "integratedTerminal",
             "args": [
                 "runserver",

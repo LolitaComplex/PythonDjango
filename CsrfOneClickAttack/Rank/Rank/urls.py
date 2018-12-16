@@ -18,6 +18,8 @@ from django.conf.urls.static import static
 from django.conf import settings
 from . import views
 
+from django.contrib.messages.context_processors import messages
+
 urlpatterns = [
     path("", views.redictIndex),
     path("index", views.index, name = "RankIndex"),

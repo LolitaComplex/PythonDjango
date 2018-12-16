@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,32 +8,48 @@
     <title>Register</title>
     <link rel="stylesheet" href="{{ STATIC_URL }}style.css" type="text/css">
 </head>
+
 <body>
     <h1>注册</h1>
 
     <form action="" method="post">
-            <table>
-                <tr>
-                    <td class="tdTitle">邮箱：</td>
-                    <td><input type="text" name="email"></td>
-                </tr>
-                <tr>
-                    <td class="tdTitle">手机：</td>
-                    <td><input type="text" name="telphone"></td>
-                </tr>
-                <tr>
-                    <td class="tdTitle">密码：</td>
-                    <td><input type="text" name="password"></td>
-                </tr>
-                <tr>
-                    <td class="tdTitle">确认密码：</td>
-                    <td><input type="text" name="confirmPassword"></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td><input type="submit" value="注册"></td>
-                </tr>
-            </table>
-        </form>
+        <table>
+            <tr>
+                <td class="tdTitle">用户名：</td>
+                <td><input type="text" name="username" value="102351512@qq.com"></td>
+            </tr>
+            <tr>
+                <td class="tdTitle">手机：</td>
+                <td><input type="text" name="telphone" value="13415334173"></td>
+            </tr>
+            <tr>
+                <td class="tdTitle">密码：</td>
+                <td><input type="text" name="password" value="123456789"></td>
+            </tr>
+            <tr>
+                <td class="tdTitle">确认密码：</td>
+                <td><input type="text" name="confirmPassword" value="12345678"></td>
+            </tr>
+            <tr>
+                <td class="tdTitle">昵称：</td>
+                <td><input type="text" name="nickname" value="布鲁马"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" value="注册"></td>
+            </tr>
+        </table>
+        <br />
+
+    </form>
+
+    <p class="tdTitle">错误信息：</p>
+    <ul>
+        {% for message in messages %}
+            <li>{{ message.message }}</li>
+        {% endfor %}
+    </ul>
+
 </body>
+
 </html>
