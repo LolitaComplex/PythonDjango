@@ -1,10 +1,15 @@
 from django.shortcuts import render, redirect, reverse
 from django.views.generic.base import View
 from django.http import HttpResponse
-from .forms import RegisterForm, LoginForm
+from .forms import RegisterForm, LoginForm, TransferForm
 from django.forms import widgets
 from django.contrib import messages
 from django.contrib.messages.api import get_messages
+from .models import User
+from django.db.models import F
+from django.db import transaction
+from django.utils.decorators import method_decorator
+from .decorrators import loginDecorator
 
 
 # Create your views here.
@@ -44,15 +49,31 @@ class RegisterView(View):
         return render(request, "register.html")
 
 
-
+@method_decorator(loginDecorator, name="dispatch")
 class TransferView(View):
 
     def get(self, request, *args, **kwargs):
         return render(request, "transfer.html")
 
     def post(self, request, *args, **kwargs):
-        return HttpResponse("转账成功")
+        transferForm = TransferForm(request.POST)
+        if transferForm.is_valid():
+            targetUserId = transferForm.getUserId
+            currentUsereId = request.session.get("userId")
+            money = transferForm.cleaned_data.get("money")
+            self.__updateMoney(targetUserId, currentUsereId, money)
+            return HttpResponse("转账成功")
+        else :
+            messages.info(request, transferForm.get_errors()[0])
+        return render(request, "transfer.html")
+
+    @transaction.atomic
+    def __updateMoney(self, targetUserId, currentUsereId, money):
+        User.objects.filter(pk = targetUserId).update(money=F("money") + float(money))
+        User.objects.filter(pk = currentUsereId).update(money=F("money") - float(money))
 
 
 def logout(request):
-    return HttpResponse("注销成功")
+    request.session.flush()
+    return redirect(reverse("RankIndex"))
+

@@ -98,12 +98,7 @@ class LoginForm(ModelForm):
     @property
     def errors(self):
         errors = super().errors
-        if errors and len(errors) == 1:
-            for valueList in errors.values():
-                for value in valueList:
-                    if "Username already exists" in value:
-                        return {}
-        return errors
+        return {} if isInclideUnique(errors) else errors
 
     @property
     def getUser(self):
@@ -113,6 +108,58 @@ class LoginForm(ModelForm):
         return getErrorsList(self)
 
 
+class TransferForm(ModelForm):
+
+    @property
+    def errors(self):
+        errors = super().errors
+        return {} if isInclideUnique(errors) else errors
+
+    def get_errors(self):
+        return getErrorsList(self)
+
+    def clean(self):
+        cleanData = super().clean()
+
+        messages = self.errors.get_json_data()
+        if not messages:
+            username = cleanData.get("username")
+
+            user = User.objects.filter(username=username).first()
+            if not user:
+                raise ValidationError(message="用户不存在")
+
+            self.__userId = user.pk
+
+        return cleanData
+    
+    @property
+    def getUserId(self):
+        return self.__userId
+
+    class Meta:
+        model = User
+        fields = ['username', 'money']
+        error_messages = {
+            "username": {
+                "required" : "用户名不能为空"
+            },
+            "money":{
+                "required": "转账金额不能为空",
+                "invalid": "请输入正确金额"
+            }
+        }
+
+
+def isInclideUnique(errors):
+    if errors and len(errors) == 1:
+        for valueList in errors.values():
+            for value in valueList:
+                if "Username already exists" in value:
+                    return True
+    return False
+
+
 def getErrorsList(self):
     errors = self.errors.get_json_data()
     messages = []
@@ -120,5 +167,5 @@ def getErrorsList(self):
     for itemList in errors.values():
         for item in itemList:
             messages.append(item.get("message"))
-
+    print(errors)
     return messages
