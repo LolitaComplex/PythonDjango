@@ -2,10 +2,12 @@ from django.shortcuts import render
 from django.http.request import QueryDict
 # from django.views.decorators.http import require_http_methods
 from django.views.decorators.http import require_GET, require_POST, require_safe
-from django.http import HttpResponse, StreamingHttpResponse
+from django.http import HttpResponse, StreamingHttpResponse, HttpRequest
 from django.template import loader
 
 import csv
+import json
+
 
 # Create your views here.
 def index(request):
@@ -23,10 +25,20 @@ def requestGet(request):
     return render(request, "method_get.html", context = context)
 
 @require_POST
-def requestPost(request):
+def requestPostForm(request):
     postDict = request.POST
     print("%s : %s" % (postDict.get("username"), postDict.get("password")))
     return render(request, "mothod_post.html")
+
+def requestPostJson(request):
+    dictBody = json.loads(request.body)
+    print(dictBody)
+    return render(request, "method_post_json.html")
+
+def requestPostText(request):
+    body = request.body
+    print(body.decode("utf-8"))
+    return render(request, "method_post_text.html")
 
 def requestTest(request):
     # TODO

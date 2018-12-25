@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b0831cc0-559f-4ca7-822f-4d909c83b9f5" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../Attacker/Attacker/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Attacker/Attacker/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Attacker/Attacker/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Attacker/Attacker/urls.py" afterDir="false" />
-    </list>
+    <list default="true" id="b0831cc0-559f-4ca7-822f-4d909c83b9f5" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -150,7 +147,7 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="55" />
     <option name="y" value="45" />
     <option name="width" value="1750" />
@@ -250,7 +247,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="7" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25670242" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />

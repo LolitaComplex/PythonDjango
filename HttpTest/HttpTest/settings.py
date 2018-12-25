@@ -25,7 +25,7 @@ SECRET_KEY = 'ysj!sk(q6rmlrw7-4lex)ctmc+!k01tlmx1vazt7@r8hkn-tbx'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["www.doing.com"]
 
 
 # Application definition
