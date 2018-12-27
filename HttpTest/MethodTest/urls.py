@@ -22,10 +22,12 @@ urlpatterns = [
     path('requestPostForm', views.requestPostForm),
     path('requestPostJson', views.requestPostJson),
     path('requestPostText', views.requestPostText),
+    path('requestPostMultipart', views.requestPostMultipart),
     path("littleFileDownload", views.littleFileDownload),
     path("littleFileMakeByTemplatesDownload", views.littleFileMakeByTemplatesDownload),
     path("bigFileDownload", views.bigFileDownload),
     path("bigFileOtherDownload", views.bigFileOtherDownload),
     path("bigFileBadDownload", views.bigFileBadDownload),
     path("bigFileCsvDownload", views.bigFileCsvDownload),
+    path("download/<fileName>", views.downloadMidia)
 ]

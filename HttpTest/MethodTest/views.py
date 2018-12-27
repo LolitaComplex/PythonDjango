@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http.request import QueryDict
 # from django.views.decorators.http import require_http_methods
 from django.views.decorators.http import require_GET, require_POST, require_safe
-from django.http import HttpResponse, StreamingHttpResponse, HttpRequest
+from django.http import HttpResponse, StreamingHttpResponse, HttpRequest, FileResponse
 from django.template import loader
 
 import csv
@@ -39,6 +39,12 @@ def requestPostText(request):
     body = request.body
     print(body.decode("utf-8"))
     return render(request, "method_post_text.html")
+
+    
+def requestPostMultipart(request):
+    body = request.body
+    print(body.decode("utf-8"))
+    return render(request, "method_post_multipart.html")
 
 def requestTest(request):
     # TODO
@@ -121,6 +127,13 @@ def bigFileBadDownload(request):
         content += row
 
     response.content = content
+    return response
+
+def downloadMidia(request, fileName):
+    targetFile = open("medias/%s" % (fileName), "rb")
+    response = FileResponse(targetFile)
+    response["Content-Type"] = "application/octet-steam"
+    response["Content-Disposition"] = "attachment; filename=%s" % (fileName)
     return response
 
     
