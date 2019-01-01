@@ -4,6 +4,7 @@ from django.http.request import QueryDict
 from django.views.decorators.http import require_GET, require_POST, require_safe
 from django.http import HttpResponse, StreamingHttpResponse, HttpRequest, FileResponse
 from django.template import loader
+from django.views.decorators.cache import cache_control
 
 import csv
 import json
@@ -14,6 +15,7 @@ def index(request):
     return render(request, "method_index.html")
 
 # @require_http_methods(["GET"])
+@cache_control(public=True, max_age=10)
 @require_GET
 def requestGet(request):
     getDict = request.GET
@@ -22,6 +24,7 @@ def requestGet(request):
     context[username] = getDict.get(username)
     context[icon] = getDict.get(icon)
     context[fuck] = getDict.get(fuck)
+    print("访问了Django服务器")
     return render(request, "method_get.html", context = context)
 
 @require_POST
