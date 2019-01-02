@@ -16,8 +16,10 @@ Including another URLconf
 from django.urls import path
 from . import views
 
+app_name = "Method"
+
 urlpatterns = [
-    path('', views.index),
+    path('', views.index, name="RequestGet"),
     path('requestGet', views.requestGet),
     path('requestPostForm', views.requestPostForm),
     path('requestPostJson', views.requestPostJson),

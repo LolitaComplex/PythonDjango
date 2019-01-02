@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, reverse
 from django.http.request import QueryDict
 # from django.views.decorators.http import require_http_methods
 from django.views.decorators.http import require_GET, require_POST, require_safe
@@ -15,7 +15,7 @@ def index(request):
     return render(request, "method_index.html")
 
 # @require_http_methods(["GET"])
-@cache_control(public=True, max_age=10)
+# @cache_control(public=True, max_age=10)
 @require_GET
 def requestGet(request):
     getDict = request.GET
@@ -24,6 +24,11 @@ def requestGet(request):
     context[username] = getDict.get(username)
     context[icon] = getDict.get(icon)
     context[fuck] = getDict.get(fuck)
+
+    via = request.META.get("Via")
+    forwards = request.META.get("Max-Forwards")
+    print(via)
+    print(forwards)
     print("访问了Django服务器")
     return render(request, "method_get.html", context = context)
 
