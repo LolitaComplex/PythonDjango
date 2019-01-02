@@ -31,5 +31,7 @@ urlpatterns = [
     path("bigFileOtherDownload", views.bigFileOtherDownload),
     path("bigFileBadDownload", views.bigFileBadDownload),
     path("bigFileCsvDownload", views.bigFileCsvDownload),
-    path("download/<fileName>", views.downloadMidia)
+    path("download/<fileName>", views.downloadMidia),
+    path("loginCookie", views.login),
+    path("testCookie", views.testCookie)
 ]

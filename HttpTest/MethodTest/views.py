@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, reverse
 from django.http.request import QueryDict
 # from django.views.decorators.http import require_http_methods
 from django.views.decorators.http import require_GET, require_POST, require_safe
-from django.http import HttpResponse, StreamingHttpResponse, HttpRequest, FileResponse
+from django.http import HttpResponse, StreamingHttpResponse, HttpRequest, FileResponse, JsonResponse
 from django.template import loader
 from django.views.decorators.cache import cache_control
 
@@ -144,5 +144,23 @@ def downloadMidia(request, fileName):
     response["Content-Disposition"] = "attachment; filename=%s" % (fileName)
     return response
 
+    a = ""
+
+def login(request):
+    postDict = request.POST
+    username = postDict.get("username")
+    password = postDict.get("password")
+    response = JsonResponse({"code": 200, "message": "登陆成功"})
+    Data.sign = "%s &___+___& %s" % (username, password)
+    response.set_cookie(key="sign", value=Data.sign, max_age=3600)
+    return response
+
+def testCookie(request):
+    cookies = request.COOKIES
+    sign = cookies.get("sign")
+    return JsonResponse({"sign": sign, "DataSign": Data.sign})
+
+class Data:
+    sign = ""
     
 
