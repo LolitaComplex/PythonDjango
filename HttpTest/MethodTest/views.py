@@ -152,6 +152,7 @@ def login(request):
     password = postDict.get("password")
     response = JsonResponse({"code": 200, "message": "登陆成功"})
     Data.sign = "%s &___+___& %s" % (username, password)
+    print(Data.sign)
     response.set_cookie(key="sign", value=Data.sign, max_age=3600)
     return response
 
