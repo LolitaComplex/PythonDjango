@@ -38,7 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'MethodTest',
-    'FileUpload'
+    'FileUpload',
+    # 'werkzeug_debugger_runserver',
+    # 'django_extensions'
 ]
 
 MIDDLEWARE = [
